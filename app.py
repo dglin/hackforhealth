@@ -3,19 +3,19 @@ import twilio.twiml
 from flask import Flask, request, redirect
 app = Flask(__name__)
 
-ACCOUNT_SID = "ACe6cf9fbeb5dd24c243eb287285f19b03"
-AUTH_TOKEN = "2fb9596882434b38e285c65a412698bc"
+#ACCOUNT_SID = "x"
+#AUTH_TOKEN = "y"
 
-def textNumber(number, location):
-	response = "Hello, the closest location to get healthcare would be " + location
-	number = "+1" + number
-	print("Yolo")
-	client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
-	try:
-		message = client.messages.create(to=number, from_="+19169707789", body=response)
-	except Exception as e:
-		return 'Failed'
-	return 'Success'
+# def textNumber(number, location):
+# 	response = "Hello, the closest location to get healthcare would be " + location
+# 	number = "+1" + number
+# 	print("Yolo")
+# 	client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
+# 	try:
+# 		message = client.messages.create(to=number, from="+19169707789", body=response)
+# 	except Exception as e:
+# 		return 'Failed'
+# 	return 'Success'
 
 
 
@@ -30,15 +30,16 @@ def helloworld():
 @app.route('/receive', methods=['GET', 'POST'])
 def recieve():
 
-
 	#Calculate the message##########
-	tempmessage = "Hello David"
-	response = tempmessage
+	# tempmessage = "Hello David"
+	# response = tempmessage
 
 	#Send a response################
 	from_number = request.values.get('From', None)
+	from_message = request.values.get('Body', None)
 	print(from_number)
-	textNumber(from_number, response)
+	print(from_message)
+	# textNumber(from_number, response)
 	################################
 
 	#HTML response to web page######
