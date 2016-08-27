@@ -17,7 +17,11 @@ app = Flask(__name__)
 # 		return 'Failed'
 # 	return 'Success'
 
+def getResponseHelp():
+	return 'Please reply with location in form of: \"Location: crossroads or address\"'
 
+def getResponseLocation():
+	return 'Please reply with information provider in form of: \"Insurance: providor or level'
 
 @app.route('/test',methods=['POST','GET'])
 def textme():
@@ -30,15 +34,23 @@ def helloworld():
 @app.route('/receive', methods=['GET', 'POST'])
 def recieve():
 
-	#Calculate the message##########
-	# tempmessage = "Hello David"
-	# response = tempmessage
-
 	#Send a response################
 	from_number = request.values.get('From', None)
 	from_message = request.values.get('Body', None)
 	print(from_number)
 	print(from_message)
+
+	if from_message == 'help':
+		response = getResponseHelp()
+		print('help')
+	else if from_message[:-8] == 'location':
+		response = getResponseLocation()
+		location = from_message.split(':')[1]
+		print('location')
+	else if from_message[:-9] = 'insurance':
+		location = from_message.split(':')[1]
+		print('insurance')
+
 	# textNumber(from_number, response)
 	################################
 
