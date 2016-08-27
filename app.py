@@ -41,12 +41,13 @@ def recieve():
 	print(from_message)
 
 	if from_message == 'Advice':
-		response = getResponseHelp()
-	else if from_message[:-8] == 'location':
-		response = getResponseLocation()
+		response = getResponseLocationInsurance()
+	elif from_message[0:8] == 'Location':
+		#response = getResponseLocationInsurance()
 		location = from_message.split(',')[0].split(':')[1]
 		insurance = from_message.split(',')[1].split(':')[1]
 		print(location + insurance)
+		response = location + insurance
 		
 
 	# textNumber(from_number, response)
@@ -54,7 +55,7 @@ def recieve():
 
 	#HTML response to web page######
 	resp = twilio.twiml.Response()
-	resp.message("Success")
+	resp.message(response)
 	return str(resp)
 	################################
 
