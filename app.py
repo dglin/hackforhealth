@@ -20,8 +20,8 @@ app = Flask(__name__)
 def getResponseHelp():
 	return 'Please reply with location in form of: \"Location: crossroads or address\"'
 
-def getResponseLocation():
-	return 'Please reply with information provider in form of: \"Insurance: providor or level'
+def getResponseLocationInsurance():
+	return 'Please reply with location and information in format of: \"Location: crossroads or address, Insurance: provider or level'
 
 @app.route('/test',methods=['POST','GET'])
 def textme():
@@ -40,16 +40,14 @@ def recieve():
 	print(from_number)
 	print(from_message)
 
-	if from_message == 'help':
+	if from_message == 'Advice':
 		response = getResponseHelp()
-		print('help')
 	else if from_message[:-8] == 'location':
 		response = getResponseLocation()
-		location = from_message.split(':')[1]
-		print('location')
-	else if from_message[:-9] = 'insurance':
-		location = from_message.split(':')[1]
-		print('insurance')
+		location = from_message.split(',')[0].split(':')[1]
+		insurance = from_message.split(',')[1].split(':')[1]
+		print(location + insurance)
+		
 
 	# textNumber(from_number, response)
 	################################
