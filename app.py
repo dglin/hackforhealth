@@ -150,7 +150,7 @@ def recieve():
 		# print(str(getDirection(myLocation, closestFromGroup(myLocation,listOfStarbucks))))
 
 		response = str(getDirection(myLocation, closestLocation))
-		response = "Closest help at: " + closestLocation + " With phone number: " + phoneNumber + '\n' + response.replace(',','\n') + '\nhttp://bit.ly/1bdDlXc'
+		response = "Closest help at: " + closestLocation + " With phone number: " + phoneNumber + '\n' + response.replace(',','\n') + '\nTake an uber to your location: http://bit.ly/1bdDlXc'
 		
 
 	# textNumber(from_number, response)
