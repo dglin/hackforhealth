@@ -111,17 +111,19 @@ def recieve():
 		response = location + insurance
 
 		myLocation = location
-		listOfStarbucks = ["4555 University Way NE, Seattle, WA 98105", "First Starbucks Pike Place, Seattle WA", "1124 Pike St, Seattle, WA 98101"] 
+		listOfStarbucks = ["105 14th Ave # 2C, Seattle, WA 98122", " 1959 NE Pacific St #453, Seattle, WA 98105", "318 2nd Ave Ext S, Seattle, WA 98104", "206 3rd Ave S, Seattle, WA 98104", "801 Broadway, Health Building, Suite 901,Seattle 98122"] 
 
 		listOfStarbucks.append("starbucks near University District Seattle WA")	
 
 		print(listOfStarbucks)
-		print(closestFromGroup(myLocation, listOfStarbucks))
 
-		print(str(getDirection(myLocation, closestFromGroup(myLocation,listOfStarbucks))))
+		closestLocation = closestFromGroup(myLocation, listOfStarbucks)
+		# print(closestFromGroup(myLocation, listOfStarbucks))
 
-		response = str(getDirection(myLocation, closestFromGroup(myLocation, listOfStarbucks)))
-		response = '\n' + response.replace(',','\n')
+		# print(str(getDirection(myLocation, closestFromGroup(myLocation,listOfStarbucks))))
+
+		response = str(getDirection(myLocation, closestLocation))
+		response = "Closest help at: " + closestLocation + '\n' + response.replace(',','\n') + '\nhttp://bit.ly/1bdDlXc'
 		
 
 	# textNumber(from_number, response)
