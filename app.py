@@ -115,12 +115,13 @@ def recieve():
 
 		listOfStarbucks.append("starbucks near University District Seattle WA")	
 
-		print listOfStarbucks
-		print closestFromGroup(myLocation, listOfStarbucks)
+		print(listOfStarbucks)
+		print(closestFromGroup(myLocation, listOfStarbucks))
 
-		print getDirection(myLocation, closestFromGroup(myLocat	ion, listOfStarbucks))
+		print(str(getDirection(myLocation, closestFromGroup(myLocation,listOfStarbucks))))
 
-		response = getDirection(myLocation, closestFromGroup(myLocat	ion, listOfStarbucks))
+		response = str(getDirection(myLocation, closestFromGroup(myLocation, listOfStarbucks)))
+		response = '\n' + response.replace(',','\n')
 		
 
 	# textNumber(from_number, response)
@@ -128,7 +129,11 @@ def recieve():
 
 	#HTML response to web page######
 	resp = twilio.twiml.Response()
-	resp.message(response)
+	try:
+		resp.message(response)
+	except Exception as e:
+		resp.message(getResponseLocationInsurance())
+		return str(resp)
 	return str(resp)
 	################################
 
