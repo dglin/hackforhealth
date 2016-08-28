@@ -11,6 +11,18 @@ from datetime import datetime
 gmaps = googlemaps.Client(key='AIzaSyAOHs5bYxYRWtFkBCOHAFkcS3-nrMd91BE')
 app = Flask(__name__)
 
+myDictionary = {}
+
+listOfStarbucks = ["105 14th Ave # 2C, Seattle, WA 98122", " 1959 NE Pacific St #453, Seattle, WA 98105", "318 2nd Ave Ext S, Seattle, WA 98104", "206 3rd Ave S, Seattle, WA 98104", "801 Broadway, Health Building, Suite 901,Seattle 98122"] 
+listOfStarbucksNumbers = ["(206) 782-5939", "(206) 461-8500", "(206) 621-7695", "(206) 744-1500", "(206) 860-6656"]
+
+listOfVision = ["105 14th Ave # 2C, Seattle, WA 98122"]
+listOfVisionNumbers = ["(206) 782-5939"]
+
+listOfDental = ["105 14th Ave # 2C, Seattle, WA 98122"]
+listOfDentalNumbers = ["(206) 782-5939"]
+
+
 
 def latLngToString(latLng):
 	return str(latLng[0])+", "+str(latLng[1])
@@ -62,7 +74,7 @@ def closestFromGroup(origin, destinationArray):
 
 	#print smallestIndex
 	#print destinationArray[smallestIndex]
-	return distanceMatrix['destination_addresses'][smallestIndex]
+	return smallestIndex
 
 #ACCOUNT_SID = "x"
 #AUTH_TOKEN = "y"
@@ -101,8 +113,15 @@ def recieve():
 	print(from_number)
 	print(from_message)
 
-	if from_message == 'Advice':
+	if from_message == 'Medical':
 		response = getResponseLocationInsurance()
+		myDictionary[from_number] = 'Medical'
+	elif from_message == 'Vision':
+		response = getResponseLocationInsurance()
+		myDictionary[from_number] = 'Vision'
+	elif from_message == 'Dental':
+		response = getResponseLocationInsurance()
+		myDictionary[from_number] = 'Dental'
 	elif from_message[0:8] == 'Location':
 		#response = getResponseLocationInsurance()
 		location = from_message.split(',')[0].split(':')[1]
@@ -111,19 +130,27 @@ def recieve():
 		response = location + insurance
 
 		myLocation = location
-		listOfStarbucks = ["105 14th Ave # 2C, Seattle, WA 98122", " 1959 NE Pacific St #453, Seattle, WA 98105", "318 2nd Ave Ext S, Seattle, WA 98104", "206 3rd Ave S, Seattle, WA 98104", "801 Broadway, Health Building, Suite 901,Seattle 98122"] 
+		# listOfStarbucks.append("starbucks near University District Seattle WA")
 
-		listOfStarbucks.append("starbucks near University District Seattle WA")	
+		if myDictionary[from_number] == 'Dental':
+			myList = listOfDental
+			myListNumbers = listOfDentalNumbers
+		elif myDictionary[from_number] == 'Vision':
+			myList = listOfVision
+			myListNumbers = listOfVisionNumbers
+		else:
+			myList = listOfStarbucks
+			myListNumbers = listOfStarbucksNumbers
 
-		print(listOfStarbucks)
-
-		closestLocation = closestFromGroup(myLocation, listOfStarbucks)
+		closestIndex = closestFromGroup(myLocation, myList)
+		closestLocation = myList[closestIndex]
+		phoneNumber = myListNumbers[closestIndex]
 		# print(closestFromGroup(myLocation, listOfStarbucks))
 
 		# print(str(getDirection(myLocation, closestFromGroup(myLocation,listOfStarbucks))))
 
 		response = str(getDirection(myLocation, closestLocation))
-		response = "Closest help at: " + closestLocation + '\n' + response.replace(',','\n') + '\nhttp://bit.ly/1bdDlXc'
+		response = "Closest help at: " + closestLocation + " With phone number: " + phoneNumber + '\n' + response.replace(',','\n') + '\nhttp://bit.ly/1bdDlXc'
 		
 
 	# textNumber(from_number, response)
