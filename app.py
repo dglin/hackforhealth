@@ -132,10 +132,10 @@ def recieve():
 		myLocation = location
 		# listOfStarbucks.append("starbucks near University District Seattle WA")
 
-		if myDictionary[from_number] == 'Dental':
+		if from_number in myDictionary.keys() and myDictionary[from_number] == 'Dental':
 			myList = listOfDental
 			myListNumbers = listOfDentalNumbers
-		elif myDictionary[from_number] == 'Vision':
+		elif from_number in myDictionary.keys() and myDictionary[from_number] == 'Vision':
 			myList = listOfVision
 			myListNumbers = listOfVisionNumbers
 		else:
