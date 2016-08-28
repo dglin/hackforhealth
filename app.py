@@ -16,11 +16,11 @@ myDictionary = {}
 listOfStarbucks = ["105 14th Ave # 2C, Seattle, WA 98122", " 1959 NE Pacific St #453, Seattle, WA 98105", "318 2nd Ave Ext S, Seattle, WA 98104", "206 3rd Ave S, Seattle, WA 98104", "801 Broadway, Health Building, Suite 901,Seattle 98122"] 
 listOfStarbucksNumbers = ["(206) 782-5939", "(206) 461-8500", "(206) 621-7695", "(206) 744-1500", "(206) 860-6656"]
 
-listOfVision = ["105 14th Ave # 2C, Seattle, WA 98122"]
-listOfVisionNumbers = ["(206) 782-5939"]
+listOfVision = ["2515 Western Ave, Seattle, WA 98121"]
+listOfVisionNumbers = ["(206) 728-5627"]
 
-listOfDental = ["105 14th Ave # 2C, Seattle, WA 98122"]
-listOfDentalNumbers = ["(206) 782-5939"]
+listOfDental = ["1959 NE Pacific St #453, Seattle, WA 98105"]
+listOfDentalNumbers = ["(206) 616-6996"]
 
 
 
